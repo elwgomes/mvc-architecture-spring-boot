@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Primary
 @Service
@@ -17,6 +18,10 @@ public class AnimalService {
 
     public List<Animal> getAllAnimals () {
         return repository.findAll();
+    }
+
+    public Optional<Animal> getAnimalById (Long id) {
+        return repository.findById(id);
     }
 
     public void createAnimal (Animal animal) {

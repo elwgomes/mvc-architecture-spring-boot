@@ -12,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
@@ -29,6 +30,13 @@ public class AnimalController {
                 .map(animal -> new AnimalDTO(animal.getName(), animal.getSpecie()))
                 .collect(Collectors.toList());
         return new AnimalControllerResponse<>("success", String.valueOf(HttpStatus.OK.value()), animalResponses);
+    }
+
+    @GetMapping("/{id}")
+    public AnimalControllerResponse<Optional<AnimalDTO>> getAnimalById (@PathVariable Long id) {
+        Optional<Animal> animal = service.getAnimalById(id);
+        Optional<AnimalDTO> animalDTO = Optional.of(new AnimalDTO(animal.get().getName(), animal.get().getSpecie()));
+        return new AnimalControllerResponse<>("success", String.valueOf(HttpStatus.OK.value()), animalDTO);
     }
 
     @PostMapping
