@@ -1,0 +1,11 @@
+spring:
+  profiles:
+    active: ${APP_PROFILE:test}
+  jpa:
+    open-in-view: false
+
+variables:
+  port: 9090
+
+server:
+  port: ${variables.port}
