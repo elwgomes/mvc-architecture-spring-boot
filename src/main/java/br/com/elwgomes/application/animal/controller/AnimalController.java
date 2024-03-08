@@ -5,6 +5,7 @@ import br.com.elwgomes.application.animal.controller.response.AnimalControllerRe
 import br.com.elwgomes.application.animal.controller.response.AnimalDTO;
 import br.com.elwgomes.application.animal.domain.Animal;
 import br.com.elwgomes.application.animal.service.AnimalService;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -39,4 +40,11 @@ public class AnimalController {
         service.createAnimal(a);
         return new AnimalControllerResponse<>("created", String.valueOf(HttpStatus.CREATED.value()), "Animal has been created.");
     }
+
+    @DeleteMapping("/{id}")
+    public AnimalControllerResponse delete (@PathVariable Long id) {
+        service.deleteAnimal(id);
+        return new AnimalControllerResponse<>("accepted", String.valueOf(HttpStatus.ACCEPTED.value()), "Animal has been deleted.");
+    }
+
 }

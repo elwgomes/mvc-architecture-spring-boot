@@ -23,4 +23,8 @@ public class AnimalService {
         this.repository.save(animal);
     }
 
+    public void deleteAnimal(Long id) {
+        this.repository.deleteById(id);
+    }
+
 }
