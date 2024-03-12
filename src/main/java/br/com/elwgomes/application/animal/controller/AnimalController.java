@@ -55,4 +55,16 @@ public class AnimalController {
         return new AnimalControllerResponse<>("accepted", String.valueOf(HttpStatus.ACCEPTED.value()), "Animal has been deleted.");
     }
 
+    @PutMapping("/{id}")
+    public AnimalControllerResponse updateAnimal (@PathVariable Long id, @RequestBody AnimalRequest request) {
+        Animal animal = new Animal(null, request.name(), request.specie());
+        service.updateAnimal(id, animal);
+        return new AnimalControllerResponse<>("success", String.valueOf(HttpStatus.OK.value()), "Animal has been updated.");
+    }
+
+    @PatchMapping("/{id}")
+    public AnimalControllerResponse updateName (@PathVariable Long id, @RequestBody AnimalRequest request) {
+        service.updateAnimalName(id, request.name());
+        return new AnimalControllerResponse<>("success", String.valueOf(HttpStatus.OK.value()), "Animal's name has been updated.");
+    }
 }
